@@ -1,12 +1,9 @@
 <div class="cart-area d-n">
-<<<<<<< HEAD
-    <a href="shopping-detail.html">
-=======
-    <a routerLink="/cart-details">
->>>>>>> 530cdd6e1c2c810536e8b60456e4e9667c0c4c16
-        <div class="total">{{ totalPrice | currency: 'USD'}}
-            <span>{{ totalQuantity }}</span> 
-        </div> 
-        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-    </a>
+  <a routerLink="/cart-details">
+    <div class="total">
+      {{ totalPrice | currency : "USD" }}
+      <span>{{ totalQuantity }}</span>
+    </div>
+    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+  </a>
 </div>
