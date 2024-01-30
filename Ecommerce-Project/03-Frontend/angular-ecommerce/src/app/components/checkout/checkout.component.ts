@@ -80,6 +80,7 @@ export class CheckoutComponent implements OnInit {
       this.creditCardYears = data;
     });
 
+    // commenting for test
     // populate countries
 
     this.luv2ShopFormService.getCountries().subscribe((data) => {
