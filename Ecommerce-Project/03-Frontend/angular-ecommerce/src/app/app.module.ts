@@ -17,33 +17,22 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 
-import { OktaAuthModule, OktaCallbackComponent, OKTA_CONFIG, OktaAuthGuard} from '@okta/okta-angular';
+import {
+  OKTA_CONFIG,
+  OktaAuthModule,
+  OktaCallbackComponent,
+} from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
 import myAppConfig from './config/my-app-config';
 import { MembersPageComponent } from './components/members-page/members-page.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 
 const oktaConfig = myAppConfig.oidc;
-  
+
 const oktaAuth = new OktaAuth(oktaConfig);
 
-function sendToLoginPage(oktaAuth: OktaAuth, injector: Injector) {
-       
-  //  Use injector to access any service available within your application
-    const router = injector.get(Router); 
-
-   // Redirect the user to your custom login page
-   router.navigate(['/login']);   
-}
-
-const routes: Routes = [ 
-  { path: 'order-history',  component: OrderHistoryComponent, canActivate: [OktaAuthGuard],
-                      data: {onAuthRequired: sendToLoginPage}},
-
-  { path: 'members',  component: MembersPageComponent, canActivate: [OktaAuthGuard],
-                      data: {onAuthRequired: sendToLoginPage}},
-
-  { path: 'login/callback', component: OktaCallbackComponent},
+const routes: Routes = [
+  { path: 'login/callback', component: OktaCallbackComponent },
   { path: 'login', component: LoginComponent },
 
   { path: 'checkout', component: CheckoutComponent },
@@ -78,8 +67,9 @@ const routes: Routes = [
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
+    OktaAuthModule,
   ],
-  providers: [ProductService, { provide: OKTA_CONFIG, useValue: { oktaAuth }}],
+  providers: [ProductService, { provide: OKTA_CONFIG, useValue: { oktaAuth } }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
